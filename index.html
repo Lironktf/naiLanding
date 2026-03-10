@@ -55,9 +55,166 @@
                 letter-spacing: 0.04em;
             }
 
-            .site-header__spacer {
-                width: 1px;
-                height: 1px;
+            .site-nav {
+                display: flex;
+                gap: 0.5rem;
+            }
+
+            .site-nav__tab {
+                padding: 0.6rem 1.25rem;
+                border: 2px solid #111;
+                border-radius: 999px;
+                background: #fff;
+                color: #111;
+                font: inherit;
+                font-size: 0.75rem;
+                font-weight: 800;
+                text-transform: uppercase;
+                letter-spacing: -0.02em;
+                cursor: pointer;
+                box-shadow: 0 4px 0 rgba(0, 0, 0, 0.55);
+                transform: translateY(0);
+                transition:
+                    background-color 150ms ease,
+                    color 150ms ease,
+                    transform 150ms ease,
+                    box-shadow 150ms ease,
+                    opacity 150ms ease;
+            }
+
+            .site-nav__tab:hover,
+            .site-nav__tab:focus-visible {
+                background: #111;
+                color: #fff;
+                outline: none;
+                transform: translateY(2px);
+                box-shadow: 0 2px 0 rgba(0, 0, 0, 0.65);
+            }
+
+            .site-nav__tab.is-active {
+                background: #111;
+                color: #fff;
+                transform: translateY(2px);
+                box-shadow: 0 2px 0 rgba(0, 0, 0, 0.65);
+            }
+
+            .panel {
+                position: absolute;
+                inset: 0;
+                min-height: 100vh;
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity 400ms ease, visibility 400ms ease;
+            }
+
+            .panel.is-active {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .panel__bg {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .panel__overlay {
+                position: absolute;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.45);
+            }
+
+            .panel__content {
+                position: relative;
+                z-index: 1;
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 5rem 1.5rem 3rem;
+            }
+
+            .panel__inner {
+                width: min(100%, 72rem);
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                text-align: left;
+            }
+
+            .panel__headline {
+                font-size: clamp(2.5rem, 8vw, 4rem);
+                font-weight: 800;
+                text-transform: uppercase;
+                letter-spacing: -0.02em;
+                line-height: 0.94;
+                color: #fff;
+                max-width: 14ch;
+                opacity: 0;
+                transform: translateY(20px);
+                transition: opacity 400ms ease 100ms, transform 400ms ease 100ms;
+            }
+
+            .panel.is-active .panel__headline {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .panel__sub {
+                margin-top: 1.5rem;
+                font-size: clamp(1rem, 2vw, 1.4rem);
+                font-weight: 400;
+                line-height: 1.3;
+                color: rgba(255, 255, 255, 0.7);
+                max-width: 32ch;
+                opacity: 0;
+                transform: translateY(20px);
+                transition: opacity 400ms ease 200ms, transform 400ms ease 200ms;
+            }
+
+            .panel.is-active .panel__sub {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .panel__cta {
+                margin-top: 2.5rem;
+                padding: 1rem 2.5rem;
+                border: 2px solid #111;
+                border-radius: 999px;
+                background: #fff;
+                color: #111;
+                font: inherit;
+                font-size: 0.95rem;
+                font-weight: 800;
+                text-transform: uppercase;
+                letter-spacing: -0.02em;
+                cursor: pointer;
+                box-shadow: 0 6px 0 rgba(0, 0, 0, 0.55);
+                transform: translateY(0);
+                text-decoration: none;
+                opacity: 0;
+                transition:
+                    background-color 150ms ease,
+                    color 150ms ease,
+                    transform 150ms ease,
+                    box-shadow 150ms ease,
+                    opacity 400ms ease 300ms;
+            }
+
+            .panel.is-active .panel__cta {
+                opacity: 1;
+            }
+
+            .panel__cta:hover,
+            .panel__cta:focus-visible {
+                background: #111;
+                color: #fff;
+                outline: none;
+                transform: translateY(3px);
+                box-shadow: 0 3px 0 rgba(0, 0, 0, 0.65);
             }
 
             .hero {
@@ -154,12 +311,36 @@
                     padding: 1.5rem 2rem;
                 }
 
-                .hero__content {
+                .hero__content,
+                .panel__content {
                     padding: 6rem 2rem 4rem;
                 }
 
-                h1 {
+                h1,
+                .panel__headline {
                     font-size: clamp(4rem, 8vw, 9rem);
+                }
+            }
+
+            @media (max-width: 480px) {
+                .site-nav {
+                    gap: 0.35rem;
+                }
+
+                .site-nav__tab {
+                    padding: 0.5rem 0.8rem;
+                    font-size: 0.65rem;
+                    box-shadow: 0 3px 0 rgba(0, 0, 0, 0.55);
+                }
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+                .panel,
+                .panel__headline,
+                .panel__sub,
+                .panel__cta,
+                .site-nav__tab {
+                    transition: none;
                 }
             }
         </style>
@@ -168,11 +349,16 @@
         <header class="site-header" aria-label="Site header">
             <div class="site-header__inner">
                 <div class="site-header__brand">NAI</div>
-                <div class="site-header__spacer" aria-hidden="true"></div>
+                <nav class="site-nav" aria-label="Main navigation">
+                    <button class="site-nav__tab" data-panel="app" type="button">App</button>
+                    <button class="site-nav__tab" data-panel="telegram" type="button">Telegram</button>
+                    <button class="site-nav__tab" data-panel="meet" type="button">Meet</button>
+                </nav>
             </div>
         </header>
         <main>
-            <section class="hero" aria-label="Hero">
+            <!-- Default Hero -->
+            <section class="hero panel is-active" data-panel="home" aria-label="Hero">
                 <img
                     class="hero__image"
                     src="./assets/mountains.jpg"
@@ -197,6 +383,89 @@
                     </div>
                 </div>
             </section>
+
+            <!-- App Panel -->
+            <section class="panel" data-panel="app" aria-label="App">
+                <img
+                    class="panel__bg"
+                    src="./assets/mountains.jpg"
+                    alt=""
+                    aria-hidden="true"
+                />
+                <div class="panel__overlay" aria-hidden="true"></div>
+                <div class="panel__content">
+                    <div class="panel__inner">
+                        <h2 class="panel__headline">Mutual verification</h2>
+                        <p class="panel__sub">Both sides prove who they are. Trust is confirmed only when both pass.</p>
+                        <a href="mailto:lironktf@gmail.com" class="panel__cta">Get early access</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Telegram Panel -->
+            <section class="panel" data-panel="telegram" aria-label="Telegram">
+                <img
+                    class="panel__bg"
+                    src="./assets/im3.jpg"
+                    alt=""
+                    aria-hidden="true"
+                />
+                <div class="panel__overlay" aria-hidden="true"></div>
+                <div class="panel__content">
+                    <div class="panel__inner">
+                        <h2 class="panel__headline">Trust in your group</h2>
+                        <p class="panel__sub">Verify members on demand. See who's real, right in the chat.</p>
+                        <a href="mailto:lironktf@gmail.com" class="panel__cta">Talk to us</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Meet Panel -->
+            <section class="panel" data-panel="meet" aria-label="Meet">
+                <img
+                    class="panel__bg"
+                    src="./assets/im2.jpg"
+                    alt=""
+                    aria-hidden="true"
+                />
+                <div class="panel__overlay" aria-hidden="true"></div>
+                <div class="panel__content">
+                    <div class="panel__inner">
+                        <h2 class="panel__headline">Verified presence</h2>
+                        <p class="panel__sub">Know who's really on the call. Live trust status for every participant.</p>
+                        <a href="mailto:lironktf@gmail.com" class="panel__cta">Talk to us</a>
+                    </div>
+                </div>
+            </section>
         </main>
+
+        <script>
+            (function() {
+                const tabs = document.querySelectorAll('.site-nav__tab');
+                const panels = document.querySelectorAll('.panel');
+                let current = 'home';
+
+                function switchTo(id) {
+                    if (id === current) {
+                        // If clicking active tab, go back to home
+                        id = 'home';
+                    }
+
+                    panels.forEach(p => {
+                        p.classList.toggle('is-active', p.dataset.panel === id);
+                    });
+
+                    tabs.forEach(t => {
+                        t.classList.toggle('is-active', t.dataset.panel === id);
+                    });
+
+                    current = id;
+                }
+
+                tabs.forEach(tab => {
+                    tab.addEventListener('click', () => switchTo(tab.dataset.panel));
+                });
+            })();
+        </script>
     </body>
 </html>
