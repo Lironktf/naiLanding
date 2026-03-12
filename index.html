@@ -83,15 +83,6 @@
                     opacity 150ms ease;
             }
 
-            .site-nav__tab:hover,
-            .site-nav__tab:focus-visible {
-                background: #111;
-                color: #fff;
-                outline: none;
-                transform: translateY(2px);
-                box-shadow: 0 2px 0 rgba(0, 0, 0, 0.65);
-            }
-
             .site-nav__tab.is-active {
                 background: #111;
                 color: #fff;
@@ -105,7 +96,9 @@
                 min-height: 100vh;
                 opacity: 0;
                 visibility: hidden;
-                transition: opacity 400ms ease, visibility 400ms ease;
+                transition:
+                    opacity 400ms ease,
+                    visibility 400ms ease;
             }
 
             .panel.is-active {
@@ -155,7 +148,9 @@
                 max-width: 14ch;
                 opacity: 0;
                 transform: translateY(20px);
-                transition: opacity 400ms ease 100ms, transform 400ms ease 100ms;
+                transition:
+                    opacity 400ms ease 100ms,
+                    transform 400ms ease 100ms;
             }
 
             .panel.is-active .panel__headline {
@@ -172,7 +167,9 @@
                 max-width: 32ch;
                 opacity: 0;
                 transform: translateY(20px);
-                transition: opacity 400ms ease 200ms, transform 400ms ease 200ms;
+                transition:
+                    opacity 400ms ease 200ms,
+                    transform 400ms ease 200ms;
             }
 
             .panel.is-active .panel__sub {
@@ -207,15 +204,6 @@
 
             .panel.is-active .panel__cta {
                 opacity: 1;
-            }
-
-            .panel__cta:hover,
-            .panel__cta:focus-visible {
-                background: #111;
-                color: #fff;
-                outline: none;
-                transform: translateY(3px);
-                box-shadow: 0 3px 0 rgba(0, 0, 0, 0.65);
             }
 
             .hero {
@@ -298,13 +286,29 @@
                     box-shadow 150ms ease;
             }
 
-            .hero__cta:hover,
+            .site-nav__tab:focus-visible,
+            .panel__cta:focus-visible,
             .hero__cta:focus-visible {
                 background: #111;
                 color: #fff;
                 outline: none;
-                transform: translateY(3px);
-                box-shadow: 0 3px 0 rgba(0, 0, 0, 0.65);
+            }
+
+            @media (hover: hover) and (pointer: fine) {
+                .site-nav__tab:hover {
+                    background: #111;
+                    color: #fff;
+                    transform: translateY(2px);
+                    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.65);
+                }
+
+                .panel__cta:hover,
+                .hero__cta:hover {
+                    background: #111;
+                    color: #fff;
+                    transform: translateY(3px);
+                    box-shadow: 0 3px 0 rgba(0, 0, 0, 0.65);
+                }
             }
 
             @media (min-width: 768px) {
@@ -351,15 +355,44 @@
             <div class="site-header__inner">
                 <div class="site-header__brand">NAI</div>
                 <nav class="site-nav" aria-label="Main navigation">
-                    <button class="site-nav__tab" data-panel="app" type="button">App</button>
-                    <button class="site-nav__tab" data-panel="telegram" type="button">Telegram</button>
-                    <button class="site-nav__tab" data-panel="meet" type="button">Meet</button>
+                    <button
+                        class="site-nav__tab is-active"
+                        data-panel="home"
+                        type="button"
+                    >
+                        Home
+                    </button>
+                    <button
+                        class="site-nav__tab"
+                        data-panel="app"
+                        type="button"
+                    >
+                        App
+                    </button>
+                    <button
+                        class="site-nav__tab"
+                        data-panel="telegram"
+                        type="button"
+                    >
+                        Telegram
+                    </button>
+                    <button
+                        class="site-nav__tab"
+                        data-panel="meet"
+                        type="button"
+                    >
+                        Meet
+                    </button>
                 </nav>
             </div>
         </header>
         <main>
             <!-- Default Hero -->
-            <section class="hero panel is-active" data-panel="home" aria-label="Hero">
+            <section
+                class="hero panel is-active"
+                data-panel="home"
+                aria-label="Hero"
+            >
                 <img
                     class="hero__image"
                     src="./assets/mountains.jpg"
@@ -370,16 +403,21 @@
                 <div class="hero__content">
                     <div class="hero__inner">
                         <h1>The Anti Human is Coming</h1>
-                        <p class="hero__subheadline">Guaranteed human verification, or your money back</p>
+                        <p class="hero__subheadline">
+                            Guaranteed human verification, or your money back
+                        </p>
                         <button
                             class="hero__cta"
                             type="button"
                             onclick="
-                                window.location.href =
-                                    'mailto:lironktf@gmail.com'
+                                window.open(
+                                    'https://auth.usenai.ca/',
+                                    '_blank',
+                                    'noopener',
+                                )
                             "
                         >
-                            Get in touch now, before it's too late
+                            Get safe now, before it's too late
                         </button>
                     </div>
                 </div>
@@ -389,7 +427,7 @@
             <section class="panel" data-panel="app" aria-label="App">
                 <img
                     class="panel__bg"
-                    src="./assets/mountains.jpg"
+                    src="./assets/im1.jpg"
                     alt=""
                     aria-hidden="true"
                 />
@@ -397,8 +435,13 @@
                 <div class="panel__content">
                     <div class="panel__inner">
                         <h2 class="panel__headline">Mutual verification</h2>
-                        <p class="panel__sub">Both sides prove who they are. Trust is confirmed only when both pass.</p>
-                        <a href="mailto:lironktf@gmail.com" class="panel__cta">Talk to us</a>
+                        <p class="panel__sub">
+                            Both sides prove who they are. Trust is confirmed
+                            only when both pass.
+                        </p>
+                        <a href="mailto:lironktf@gmail.com" class="panel__cta"
+                            >Talk to us</a
+                        >
                     </div>
                 </div>
             </section>
@@ -415,8 +458,18 @@
                 <div class="panel__content">
                     <div class="panel__inner">
                         <h2 class="panel__headline">Trust in your group</h2>
-                        <p class="panel__sub">Verify members on demand. See who's real, right in the chat.</p>
-                        <a href="mailto:lironktf@gmail.com" class="panel__cta">Try it NOW</a>
+                        <p class="panel__sub">
+                            Verify members on demand. See who's real, right in
+                            the chat.
+                        </p>
+                        <a
+                            href="https://t.me/NAI_auth_bot"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="panel__cta"
+                        >
+                            Try it NOW
+                        </a>
                     </div>
                 </div>
             </section>
@@ -433,38 +486,51 @@
                 <div class="panel__content">
                     <div class="panel__inner">
                         <h2 class="panel__headline">Verified presence</h2>
-                        <p class="panel__sub">Know who's really on the call. Live trust status for every participant.</p>
-                        <a href="mailto:lironktf@gmail.com" class="panel__cta">Try it NOW</a>
+                        <p class="panel__sub">
+                            Know who's really on the call. Live trust status for
+                            every participant.
+                        </p>
+                        <a href="mailto:lironktf@gmail.com" class="panel__cta"
+                            >Try it NOW</a
+                        >
                     </div>
                 </div>
             </section>
         </main>
 
         <script>
-            (function() {
-                const tabs = document.querySelectorAll('.site-nav__tab');
-                const panels = document.querySelectorAll('.panel');
-                let current = 'home';
+            (function () {
+                const tabs = document.querySelectorAll(".site-nav__tab");
+                const panels = document.querySelectorAll(".panel");
+                let current = "home";
 
                 function switchTo(id) {
                     if (id === current) {
                         // If clicking active tab, go back to home
-                        id = 'home';
+                        id = "home";
                     }
 
-                    panels.forEach(p => {
-                        p.classList.toggle('is-active', p.dataset.panel === id);
+                    panels.forEach((p) => {
+                        p.classList.toggle("is-active", p.dataset.panel === id);
                     });
 
-                    tabs.forEach(t => {
-                        t.classList.toggle('is-active', t.dataset.panel === id);
+                    tabs.forEach((t) => {
+                        const isActive = t.dataset.panel === id;
+                        t.classList.toggle("is-active", isActive);
+                        t.setAttribute("aria-pressed", String(isActive));
                     });
 
                     current = id;
                 }
 
-                tabs.forEach(tab => {
-                    tab.addEventListener('click', () => switchTo(tab.dataset.panel));
+                tabs.forEach((tab) => {
+                    tab.setAttribute(
+                        "aria-pressed",
+                        String(tab.dataset.panel === current),
+                    );
+                    tab.addEventListener("click", () =>
+                        switchTo(tab.dataset.panel),
+                    );
                 });
             })();
         </script>
