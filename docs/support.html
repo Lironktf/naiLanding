@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NAI Support</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #0a0a0a;
+        --surface: #111111;
+        --ink: #f5f5f5;
+        --border: #2a2a2a;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Times New Roman", Times, serif;
+        background: var(--bg);
+        color: var(--ink);
+      }
+
+      main {
+        width: min(900px, calc(100vw - 32px));
+        margin: 0 auto;
+        padding: 40px 0 72px;
+      }
+
+      .sheet {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        padding: 32px;
+      }
+
+      h1 {
+        margin: 0 0 16px;
+        font-size: clamp(2.5rem, 6vw, 4.5rem);
+        line-height: 1.05;
+      }
+
+      a {
+        color: var(--ink);
+        font-size: 1.125rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="sheet">
+        <h1>Support</h1>
+        <a href="mailto:lironktf@gmail.com">lironktf@gmail.com</a>
+      </div>
+    </main>
+  </body>
+</html>
